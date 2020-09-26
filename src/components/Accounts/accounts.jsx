@@ -16,8 +16,8 @@ const AccountsIndex = () => {
     <>
       <h1>My Accounts</h1>
       <AccountForm />
-      <table>
-        <thead>
+      <table className="table">
+        <thead className="table-headers">
           <tr>
             <th>Name</th>
             <th>Type</th>

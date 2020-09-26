@@ -11,15 +11,17 @@ function App() {
     <>
       <NavBar />
       <AppContextProvider>
-        <Route exact path="/">
-          <Expenses />
-        </Route>
-        <Route path="/accounts">
-          <AccountsIndex />
-        </Route>
-        <Route path="/categories">
-          <CategoriesIndex />
-        </Route>
+        <main>
+          <Route exact path="/">
+            <Expenses />
+          </Route>
+          <Route path="/accounts">
+            <AccountsIndex />
+          </Route>
+          <Route path="/categories">
+            <CategoriesIndex />
+          </Route>
+        </main>
       </AppContextProvider>
     </>
   );

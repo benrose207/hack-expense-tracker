@@ -8,8 +8,10 @@ const Expenses = () => {
 
   return (
     <>
-      <h1>My Expenses</h1>
+      <h1>Expense Report</h1>
+      <h2>New Expense</h2>
       <ExpenseForm state={state} dispatch={dispatch} />
+      <h2>All Expenses</h2>
       <ExpensesTable state={state} dispatch={dispatch} />
     </>
   );

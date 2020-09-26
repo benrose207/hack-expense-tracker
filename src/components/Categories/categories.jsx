@@ -16,8 +16,8 @@ const CategoriesIndex = () => {
     <>
       <h1>My Categories</h1>
       <CategoryForm />
-      <table>
-        <thead>
+      <table className="table">
+        <thead className="table-headers">
           <tr>
             <th>Name</th>
             <th>Color</th>
@@ -28,7 +28,7 @@ const CategoriesIndex = () => {
           {Object.values(state.categories).map((category) => (
             <tr key={category.id}>
               <td>{category.name}</td>
-              <td>{category.color}</td>
+              <td style={{ 'background-color': `${category.color}`}}></td>
               <td>
                 <button onClick={() => handleDelete(category.id)}>Delete</button>
               </td>

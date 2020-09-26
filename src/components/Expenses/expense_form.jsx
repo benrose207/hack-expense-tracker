@@ -29,51 +29,56 @@ const ExpenseForm = ({ state, dispatch }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="expense-amount">Amount</label>
-      <input
-        type="number"
-        id="expense-amount"
-        required
-        value={amount}
-        onChange={(event) => setAmount(event.target.value)}
-      />
+    <form onSubmit={handleSubmit} className="form">
+      <div className="form-labels">
+        <label htmlFor="expense-date">Date</label>
+        <label htmlFor="expense-amount">Amount</label>
+        <label htmlFor="expense-category">Category</label>
+        <label htmlFor="expense-account">Account</label>
+      </div>
 
-      <label htmlFor="expense-date">Date</label>
-      <input
-        type="date"
-        id="expense-date"
-        required
-        value={date}
-        onChange={(event) => setDate(event.target.value)}
-      />
+      <div className="form-inputs">
+        <input
+          type="date"
+          id="expense-date"
+          required
+          value={date}
+          onChange={(event) => setDate(event.target.value)}
+        />
 
-      <label htmlFor="expense-account">Account</label>
-      <select
-        id="expense-account"
-        required
-        value={account}
-        onChange={(event) => setAccount(event.target.value)}
-      >
-        <option value="">-Select Account-</option>
-        {accounts.map((acct) => (
-          <option value={acct.id}>{acct.title}</option>
-        ))}
-      </select>
+        <input
+          type="number"
+          id="expense-amount"
+          required
+          value={amount}
+          onChange={(event) => setAmount(event.target.value)}
+        />
 
-      <label htmlFor="expense-category">Account</label>
-      <select
-        id="expense-category"
-        required
-        value={category}
-        onChange={(event) => setCategory(event.target.value)}
-      >
-        <option value="">-Select Category-</option>
-        {categories.map((cat) => (
-          <option value={cat.id}>{cat.name}</option>
-        ))}
-      </select>
-      <button>Add</button>
+        <select
+          id="expense-account"
+          required
+          value={account}
+          onChange={(event) => setAccount(event.target.value)}
+        >
+          <option value="">-Select Account-</option>
+          {accounts.map((acct) => (
+            <option value={acct.id}>{acct.title}</option>
+          ))}
+        </select>
+
+        <select
+          id="expense-category"
+          required
+          value={category}
+          onChange={(event) => setCategory(event.target.value)}
+        >
+          <option value="">-Select Category-</option>
+          {categories.map((cat) => (
+            <option value={cat.id}>{cat.name}</option>
+          ))}
+        </select>
+        <button>Add</button>
+      </div>
     </form>
   );
 };
