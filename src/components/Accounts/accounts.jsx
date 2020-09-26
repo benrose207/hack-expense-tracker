@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import AccountForm from './account_form.jsx';
-import { AccountContext } from '../../reducers/store';
+import { AppContext } from '../../reducers/store';
 
 const AccountsIndex = () => {
-  const [state, dispatch] = useContext(AccountContext);
+  const [state, dispatch] = useContext(AppContext);
 
   const handleDelete = (id) => {
     dispatch({
@@ -16,14 +16,26 @@ const AccountsIndex = () => {
     <>
       <h1>My Accounts</h1>
       <AccountForm />
-      <ul>
-        {Object.values(state.accounts).map((account) => (
-          <li key={account.id}>
-            {account.title} - {account.type}
-            <button onClick={() => handleDelete(account.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.values(state.accounts).map((account) => (
+            <tr key={account.id}>
+              <td>{account.title}</td>
+              <td>{account.type}</td>
+              <td>
+                <button onClick={() => handleDelete(account.id)}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 };

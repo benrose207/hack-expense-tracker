@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
-import { AccountContext } from '../../reducers/store';
+import { AppContext } from '../../reducers/store';
 
 const AccountForm = () => {
-  const [dispatch] = useContext(AccountContext);
+  const [state, dispatch] = useContext(AppContext);
   const [title, setTitle] = useState('');
   const [type, setType] = useState('');
 
@@ -33,7 +33,7 @@ const AccountForm = () => {
         value={type}
         onChange={(event) => setType(event.target.value)}
       >
-        <option value="">--Select an Option--</option>
+        <option value="">- Select an Option -</option>
         <option value="cash">Cash</option>
         <option value="check">Check</option>
         <option value="credit">Credit</option>

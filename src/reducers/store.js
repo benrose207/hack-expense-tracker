@@ -1,6 +1,6 @@
 import React, { useReducer, createContext } from "react";
 
-export const AccountContext = createContext();
+export const AppContext = createContext();
 
 const initialState = {
   accounts: {},
@@ -17,17 +17,23 @@ const reducer = (state, action) => {
     case 'DELETE_ACCOUNT':
       delete newState['accounts'][action.payload];
       return newState;
+    case 'ADD_CATEGORY':
+      newState['categories'][action.payload.id] = action.payload;
+      return newState;
+    case 'DELETE_CATEGORY':
+      delete newState['categories'][action.payload];
+      return newState;
     default:
       throw new Error();
   }
 };
 
-export const AccountContextProvider = (props) => {
+export const AppContextProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <AccountContext.Provider value={[state, dispatch]}>
+    <AppContext.Provider value={[state, dispatch]}>
       {props.children}
-    </AccountContext.Provider>
+    </AppContext.Provider>
   );
 };
