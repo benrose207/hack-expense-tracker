@@ -34,10 +34,10 @@ const AccountForm = () => {
         onChange={(event) => setType(event.target.value)}
       >
         <option value="">- Select an Option -</option>
-        <option value="cash">Cash</option>
-        <option value="check">Check</option>
-        <option value="credit">Credit</option>
-        <option value="bank-account">Bank Account</option>
+        <option value="Cash">Cash</option>
+        <option value="Check">Check</option>
+        <option value="Credit">Credit</option>
+        <option value="Bank Account">Bank Account</option>
       </select>
       <button>Add</button>
     </form>

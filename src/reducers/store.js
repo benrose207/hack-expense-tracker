@@ -23,6 +23,12 @@ const reducer = (state, action) => {
     case 'DELETE_CATEGORY':
       delete newState['categories'][action.payload];
       return newState;
+    case 'ADD_EXPENSE':
+      newState['expenses'][action.payload.id] = action.payload;
+      return newState;
+    case 'DELETE_EXPENSE':
+      delete newState['expenses'][action.payload];
+      return newState;
     default:
       throw new Error();
   }
