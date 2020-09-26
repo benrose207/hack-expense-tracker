@@ -2,14 +2,20 @@ import React, { useReducer, createContext } from "react";
 
 export const AccountContext = createContext();
 
-const initialState = {};
+const initialState = {
+  accounts: {},
+  categories: {},
+  expenses: {}
+};
 
 const reducer = (state, action) => {
-  let newState = { ...state};
+  let newState = { ...state };
   switch (action.type) {
     case 'ADD_ACCOUNT':
-      const uniqueId = new Date().valueOf();
-      newState[uniqueId] = action.payload;
+      newState['accounts'][action.payload.id] = action.payload;
+      return newState;
+    case 'DELETE_ACCOUNT':
+      delete newState['accounts'][action.payload];
       return newState;
     default:
       throw new Error();
