@@ -1,20 +1,12 @@
 import React, { useContext } from 'react';
 import AccountForm from './account_form.jsx';
 import { AppContext } from '../../reducers/store';
+import { DeleteButton } from '../Util_Components/buttons.jsx';
 
 const AccountsIndex = () => {
-  const [state, dispatch] = useContext(AppContext);
+  const [state] = useContext(AppContext);
 
-  const handleDelete = (id) => {
-    const answer = window.confirm('Are you sure you want to delete this account? Deleting this will also delete any expenses filed under this account');
-
-    if (answer) {
-      dispatch({
-        type: 'DELETE_ACCOUNT',
-        payload: id,
-      });
-    }
-  };
+  const confirmDeleteMessage = 'Are you sure you want to delete this account? Deleting this will also delete any expenses filed under this account';
 
   return (
     <>
@@ -34,7 +26,7 @@ const AccountsIndex = () => {
               <td>{account.title}</td>
               <td>{account.type}</td>
               <td>
-                <button onClick={() => handleDelete(account.id)}>Delete</button>
+                <DeleteButton id={account.id} type="DELETE_ACCOUNT" message={confirmDeleteMessage}/>
               </td>
             </tr>
           ))}

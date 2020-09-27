@@ -1,17 +1,26 @@
 import React from 'react';
-import { useTable, useSortBy } from 'react-table';
+import { useTable, useSortBy, useExpanded } from 'react-table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
+import ExpenseForm from './expense_form.jsx';
 
-const ExpensesTable = ({ columns, data, dispatch }) => {
-
+const ExpensesTable = ({
+  columns,
+  data,
+  state,
+  dispatch,
+}) => {
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     rows,
     prepareRow,
-  } = useTable({ columns, data }, useSortBy);
+    visibleColumns,
+  } = useTable({
+    columns,
+    data,
+  }, useSortBy, useExpanded);
 
   const noTableContent = data.length ? null : (
     <p>No expenses added yet! Make sure you've added an Account and Category before you add expenses</p>
@@ -38,19 +47,26 @@ const ExpensesTable = ({ columns, data, dispatch }) => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
+          {rows.map((row, idx) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
+              <React.Fragment key={idx}>
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => (
                     <td {...cell.getCellProps()}>
                       {cell.render('Cell')}
                     </td>
-                  )
-                })}
-              </tr>
-            )
+                  ))}
+                </tr>
+                {row.isExpanded ? (
+                  <tr>
+                    <td colSpan={visibleColumns.length}>
+                      <ExpenseForm state={state} dispatch={dispatch} id={row.cells[5].value}/>
+                    </td>
+                  </tr>
+                ) : null}
+              </React.Fragment>
+            );
           })}
         </tbody>
       </table>

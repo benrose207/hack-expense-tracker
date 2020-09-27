@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 
-const ExpenseForm = ({ state, dispatch }) => {
+const ExpenseForm = ({ state, dispatch, id }) => {
   const accounts = state.accounts ? Object.values(state.accounts) : [];
   const categories = state.categories ? Object.values(state.categories) : [];
+  const currExpense = state.expenses[id];
 
-  const [amount, setAmount] = useState(0);
-  const [date, setDate] = useState('');
-  const [account, setAccount] = useState('');
-  const [category, setCategory] = useState('');
+  const [amount, setAmount] = useState(currExpense ? currExpense.amount : 0);
+  const [date, setDate] = useState(currExpense ? currExpense.date : '');
+  const [account, setAccount] = useState(currExpense ? currExpense.account : '');
+  const [category, setCategory] = useState(currExpense ? currExpense.category : '');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,7 +19,7 @@ const ExpenseForm = ({ state, dispatch }) => {
         date,
         account,
         category,
-        id: new Date().valueOf(),
+        id: currExpense ? currExpense.id : new Date().valueOf(),
       },
     });
 
@@ -82,7 +83,7 @@ const ExpenseForm = ({ state, dispatch }) => {
         </select>
       </div>
 
-      <button>Add</button>
+      <button>{currExpense ? 'Update' : 'Add'}</button>
     </form>
   );
 };

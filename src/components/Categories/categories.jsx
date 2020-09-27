@@ -1,20 +1,12 @@
 import React, { useContext } from 'react';
 import CategoryForm from './categories_form.jsx';
 import { AppContext } from '../../reducers/store';
+import { DeleteButton } from '../Util_Components/buttons.jsx';
 
 const CategoriesIndex = () => {
-  const [state, dispatch] = useContext(AppContext);
+  const [state] = useContext(AppContext);
 
-  const handleDelete = (id) => {
-    const answer = window.confirm('Are you sure you want to delete this category? Deleting this will also delete any expenses filed under this category');
-
-    if (answer) {
-      dispatch({
-        type: 'DELETE_CATEGORY',
-        payload: id,
-      });
-    }
-  };
+  const confirmDeleteMessage = 'Are you sure you want to delete this category? Deleting this will also delete any expenses filed under this category';
 
   return (
     <>
@@ -34,7 +26,7 @@ const CategoriesIndex = () => {
               <td>{category.name}</td>
               <td style={{ backgroundColor: `${category.color}` }}></td>
               <td>
-                <button onClick={() => handleDelete(category.id)}>Delete</button>
+                <DeleteButton id={category.id} type="DELETE_CATEGORY" message={confirmDeleteMessage}/>
               </td>
             </tr>
           ))}
