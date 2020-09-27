@@ -61,6 +61,10 @@ const Expenses = () => {
     []
   );
 
+  const noTableContent = data.length ? null : (
+    <p>No expenses added yet! Make sure you've added an Account and Category before you add expenses</p>
+  );
+
   return (
     <>
       <h1>Expense Report</h1>
@@ -71,7 +75,10 @@ const Expenses = () => {
         columns={columns}
         data={data}
         state={state}
-        dispatch={dispatch} />
+        dispatch={dispatch}
+        parent="Exp"
+      />
+      {noTableContent}
     </>
   );
 };

@@ -1,37 +1,59 @@
-import React, { useContext } from 'react';
-import CategoryForm from './categories_form.jsx';
-import { AppContext } from '../../reducers/store';
+import React, { useContext, useMemo } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { DeleteButton } from '../Util_Components/buttons.jsx';
+import { AppContext } from '../../reducers/store';
+import CategoryForm from './categories_form.jsx';
+import ExpensesTable from '../Expenses/expenses_table.jsx';
 
 const CategoriesIndex = () => {
-  const [state] = useContext(AppContext);
+  const [state, dispatch] = useContext(AppContext);
 
   const confirmDeleteMessage = 'Are you sure you want to delete this category? Deleting this will also delete any expenses filed under this category';
+
+  const getData = () => (
+    Object.values(state.categories)
+  );
+
+  const data = getData();
+
+  const columns = useMemo(
+    () => [
+      {
+        Header: 'Name',
+        accessor: 'name',
+      },
+      {
+        Header: 'Type',
+        accessor: 'color',
+      },
+      {
+        Header: 'Actions',
+        accessor: 'id',
+        Cell: ({ cell: { value }, row }) => (
+          <>
+            <DeleteButton id={value} type='DELETE_CATEGORY' message={confirmDeleteMessage} />
+            <span {...row.getToggleRowExpandedProps()}>
+              <FontAwesomeIcon icon={faEdit} />
+            </span>
+          </>
+        ),
+      },
+    ],
+    []
+  );
 
   return (
     <>
       <h1>My Categories</h1>
-      <CategoryForm />
-      <table className="table">
-        <thead className="table-headers">
-          <tr>
-            <th>Name</th>
-            <th>Color</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.values(state.categories).map((category) => (
-            <tr key={category.id}>
-              <td>{category.name}</td>
-              <td style={{ backgroundColor: `${category.color}` }}></td>
-              <td>
-                <DeleteButton id={category.id} type="DELETE_CATEGORY" message={confirmDeleteMessage}/>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <CategoryForm state={state} dispatch={dispatch}/>
+      <ExpensesTable
+        columns={columns}
+        data={data}
+        state={state}
+        dispatch={dispatch}
+        parent="Cat"
+      />
     </>
   );
 };

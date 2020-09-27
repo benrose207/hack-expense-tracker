@@ -1,16 +1,20 @@
 import React, { useState, useContext } from 'react';
 import { AppContext } from '../../reducers/store';
 
-const CategoryForm = () => {
-  const [state, dispatch] = useContext(AppContext);
-  const [name, setName] = useState('');
-  const [color, setColor] = useState('');
+const CategoryForm = ({ state, dispatch, id }) => {
+  const currCat = state.categories[id];
+  const [name, setName] = useState(currCat ? currCat.name : '');
+  const [color, setColor] = useState(currCat ? currCat.color : '');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch({
       type: 'ADD_CATEGORY',
-      payload: { name, color, id: new Date().valueOf() },
+      payload: {
+        name,
+        color,
+        id: currCat ? currCat.id : new Date().valueOf(),
+      },
     });
 
     setName('');
@@ -47,7 +51,7 @@ const CategoryForm = () => {
         </select>
       </div>
 
-      <button>Add</button>
+      <button>{currCat ? 'Update' : 'Add'}</button>
     </form>
   );
 };

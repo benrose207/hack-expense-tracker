@@ -3,12 +3,15 @@ import { useTable, useSortBy, useExpanded } from 'react-table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 import ExpenseForm from './expense_form.jsx';
+import AccountForm from '../Accounts/account_form.jsx';
+import CategoryForm from '../Categories/categories_form.jsx';
 
 const ExpensesTable = ({
   columns,
   data,
   state,
   dispatch,
+  parent,
 }) => {
   const {
     getTableProps,
@@ -21,10 +24,6 @@ const ExpensesTable = ({
     columns,
     data,
   }, useSortBy, useExpanded);
-
-  const noTableContent = data.length ? null : (
-    <p>No expenses added yet! Make sure you've added an Account and Category before you add expenses</p>
-  );
 
   return (
     <>
@@ -61,7 +60,12 @@ const ExpensesTable = ({
                 {row.isExpanded ? (
                   <tr>
                     <td colSpan={visibleColumns.length}>
-                      <ExpenseForm state={state} dispatch={dispatch} id={row.cells[5].value}/>
+                      {parent === 'Acct' ? (
+                        <AccountForm state={state} dispatch={dispatch} id={row.cells[2].value}/>
+                      ) : parent === 'Exp' ? (
+                        <ExpenseForm state={state} dispatch={dispatch} id={row.cells[5].value} />
+                      ) : (
+                        <CategoryForm state={state} dispatch={dispatch} id={row.cells[2].value}/>)}
                     </td>
                   </tr>
                 ) : null}
@@ -70,7 +74,6 @@ const ExpensesTable = ({
           })}
         </tbody>
       </table>
-      {noTableContent}
     </>
   );
 };

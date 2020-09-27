@@ -1,16 +1,20 @@
 import React, { useState, useContext } from 'react';
 import { AppContext } from '../../reducers/store';
 
-const AccountForm = () => {
-  const [state, dispatch] = useContext(AppContext);
-  const [title, setTitle] = useState('');
-  const [type, setType] = useState('');
+const AccountForm = ({ state, dispatch, id }) => {
+  const currAcct = state.accounts[id];
+  const [title, setTitle] = useState(currAcct ? currAcct.title : '');
+  const [type, setType] = useState(currAcct ? currAcct.type : '');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch({
       type: 'ADD_ACCOUNT',
-      payload: { title, type, id: new Date().valueOf() },
+      payload: {
+        title,
+        type,
+        id: currAcct ? currAcct.id : new Date().valueOf(),
+      },
     });
 
     setTitle('');
@@ -45,7 +49,7 @@ const AccountForm = () => {
         </select>
       </div>
 
-      <button>Add</button>
+      <button>{currAcct ? 'Update' : 'Add'}</button>
     </form>
   );
 };
