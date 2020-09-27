@@ -1,5 +1,7 @@
 import React from 'react';
 import { useTable, useSortBy } from 'react-table';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 
 const ExpensesTable = ({ columns, data, dispatch }) => {
 
@@ -10,13 +12,6 @@ const ExpensesTable = ({ columns, data, dispatch }) => {
     rows,
     prepareRow,
   } = useTable({ columns, data }, useSortBy);
-
-  const handleDelete = (id) => {
-    dispatch({
-      type: 'DELETE_EXPENSE',
-      payload: id,
-    });
-  };
 
   const noTableContent = data.length ? null : (
     <p>No expenses added yet! Make sure you've added an Account and Category before you add expenses</p>
@@ -31,6 +26,12 @@ const ExpensesTable = ({ columns, data, dispatch }) => {
               {headerGroup.headers.map((column) => (
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render('Header')}
+                  <span>
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? <FontAwesomeIcon icon={faCaretDown} className="table-caret"/>
+                        : <FontAwesomeIcon icon={faCaretUp} className="table-caret"/> : ''}
+                  </span>
                 </th>
               ))}
             </tr>

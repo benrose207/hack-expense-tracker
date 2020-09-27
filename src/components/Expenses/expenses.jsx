@@ -2,6 +2,7 @@ import React, { useContext, useMemo } from 'react';
 import { AppContext } from '../../reducers/store';
 import ExpenseForm from './expense_form.jsx';
 import ExpensesTable from './expenses_table.jsx';
+import { DeleteButton } from '../Util_Components/buttons.jsx';
 
 const Expenses = () => {
   const [state, dispatch] = useContext(AppContext);
@@ -32,6 +33,11 @@ const Expenses = () => {
       {
         Header: 'Account',
         accessor: 'accountName',
+      },
+      {
+        Header: 'Actions',
+        accessor: 'id',
+        Cell: ({ cell: { value } }) => <DeleteButton id={value}/>,
       },
     ],
     []

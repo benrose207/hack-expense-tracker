@@ -62,7 +62,7 @@ const ExpenseForm = ({ state, dispatch }) => {
         >
           <option value="">-Select Account-</option>
           {accounts.map((acct) => (
-            <option value={acct.id}>{acct.title}</option>
+            <option key={acct.id} value={acct.id}>{acct.title}</option>
           ))}
         </select>
       </div>
@@ -77,7 +77,7 @@ const ExpenseForm = ({ state, dispatch }) => {
         >
           <option value="">-Select Category-</option>
           {categories.map((cat) => (
-            <option value={cat.id}>{cat.name}</option>
+            <option key={cat.id} value={cat.id}>{cat.name}</option>
           ))}
         </select>
       </div>

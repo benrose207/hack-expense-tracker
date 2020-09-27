@@ -94,6 +94,10 @@ h2 {
   padding: 0.7rem;
 }
 
+.table-caret {
+  margin-left: 0.4rem;
+}
+
 /* buttons */
 form button {
   background-color: #65e6ca;
