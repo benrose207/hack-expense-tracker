@@ -53,30 +53,28 @@ h2 {
 /* Expense form */
 .form {
   margin: 1.7rem 0;
-}
-
-.form-labels {
   display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex-wrap: wrap;
 }
 
-.form-labels > label {
+.form-input {
   margin: 0.4rem 0;
   margin-right: 1.2rem;
-  flex: 1;
+  min-width: 0;
+}
+
+.form-input label {
   font-weight: 500;
 }
 
-.form-inputs {
-  display: flex;
-}
-
-.form-inputs > input, .form-inputs > select {
-  margin: 0.4rem 0;
-  margin-right: 1.2rem;
-  flex: 1;
+.form-input > input, .form-input > select {
+  margin-top: 0.6rem;
   border: 1px solid #797979;
   padding: 0.5rem;
   border-radius: 6px;
+  min-height: 2.6rem;
 }
 
 /* Expense Table */
@@ -102,6 +100,7 @@ form button {
   padding: 0.3rem 1.5rem;
   border-radius: 6px;
   height: 45px;
-  margin: auto;
   font-weight: 500;
+  margin-left: 1rem;
+  margin-bottom: 0.3rem;
 }

@@ -6,10 +6,14 @@ const CategoriesIndex = () => {
   const [state, dispatch] = useContext(AppContext);
 
   const handleDelete = (id) => {
-    dispatch({
-      type: 'DELETE_CATEGORY',
-      payload: id,
-    });
+    const answer = window.confirm('Are you sure you want to delete this category? Deleting this will also delete any expenses filed under this category');
+
+    if (answer) {
+      dispatch({
+        type: 'DELETE_CATEGORY',
+        payload: id,
+      });
+    }
   };
 
   return (
@@ -28,7 +32,7 @@ const CategoriesIndex = () => {
           {Object.values(state.categories).map((category) => (
             <tr key={category.id}>
               <td>{category.name}</td>
-              <td style={{ 'background-color': `${category.color}`}}></td>
+              <td style={{ backgroundColor: `${category.color}` }}></td>
               <td>
                 <button onClick={() => handleDelete(category.id)}>Delete</button>
               </td>

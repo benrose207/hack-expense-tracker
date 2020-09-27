@@ -19,19 +19,17 @@ const CategoryForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="form">
-      <div className="form-labels">
+      <div className="form-input">
         <label htmlFor="category-name">Name</label>
-        <label htmlFor="category-color">Color</label>
-      </div>
-
-      <div className="form-inputs">
         <input
           type="text"
           id="category-name"
           required
           value={name}
           onChange={(event) => setName(event.target.value)} />
-
+      </div>
+      <div className="form-input">
+        <label htmlFor="category-color">Color</label>
         <select
           id="category-color"
           required
@@ -47,8 +45,9 @@ const CategoryForm = () => {
           <option value="#4354e8">Purple</option>
           <option value="#e843bc">Pink</option>
         </select>
-        <button>Add</button>
       </div>
+
+      <button>Add</button>
     </form>
   );
 };

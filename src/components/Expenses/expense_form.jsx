@@ -30,14 +30,8 @@ const ExpenseForm = ({ state, dispatch }) => {
 
   return (
     <form onSubmit={handleSubmit} className="form">
-      <div className="form-labels">
+      <div className="form-input">
         <label htmlFor="expense-date">Date</label>
-        <label htmlFor="expense-amount">Amount</label>
-        <label htmlFor="expense-category">Category</label>
-        <label htmlFor="expense-account">Account</label>
-      </div>
-
-      <div className="form-inputs">
         <input
           type="date"
           id="expense-date"
@@ -45,7 +39,10 @@ const ExpenseForm = ({ state, dispatch }) => {
           value={date}
           onChange={(event) => setDate(event.target.value)}
         />
+      </div>
 
+      <div className="form-input">
+        <label htmlFor="expense-amount">Amount</label>
         <input
           type="number"
           id="expense-amount"
@@ -53,7 +50,10 @@ const ExpenseForm = ({ state, dispatch }) => {
           value={amount}
           onChange={(event) => setAmount(event.target.value)}
         />
+      </div>
 
+      <div className="form-input">
+        <label htmlFor="expense-category">Category</label>
         <select
           id="expense-account"
           required
@@ -65,7 +65,10 @@ const ExpenseForm = ({ state, dispatch }) => {
             <option value={acct.id}>{acct.title}</option>
           ))}
         </select>
+      </div>
 
+      <div className="form-input">
+        <label htmlFor="expense-account">Account</label>
         <select
           id="expense-category"
           required
@@ -77,8 +80,9 @@ const ExpenseForm = ({ state, dispatch }) => {
             <option value={cat.id}>{cat.name}</option>
           ))}
         </select>
-        <button>Add</button>
       </div>
+
+      <button>Add</button>
     </form>
   );
 };

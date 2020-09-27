@@ -6,10 +6,14 @@ const AccountsIndex = () => {
   const [state, dispatch] = useContext(AppContext);
 
   const handleDelete = (id) => {
-    dispatch({
-      type: 'DELETE_ACCOUNT',
-      payload: id,
-    });
+    const answer = window.confirm('Are you sure you want to delete this account? Deleting this will also delete any expenses filed under this account');
+
+    if (answer) {
+      dispatch({
+        type: 'DELETE_ACCOUNT',
+        payload: id,
+      });
+    }
   };
 
   return (

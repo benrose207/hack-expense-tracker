@@ -1,8 +1,15 @@
 import React from 'react';
+import { useTable, useSortBy } from 'react-table';
 
-const ExpensesTable = ({ state, dispatch }) => {
-  const expenses = Object.values(state.expenses);
-  const { accounts, categories } = state;
+const ExpensesTable = ({ columns, data, dispatch }) => {
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = useTable({ columns, data }, useSortBy);
 
   const handleDelete = (id) => {
     dispatch({
@@ -11,38 +18,39 @@ const ExpensesTable = ({ state, dispatch }) => {
     });
   };
 
-  const noTableContent = expenses.length ? null : (
+  const noTableContent = data.length ? null : (
     <p>No expenses added yet! Make sure you've added an Account and Category before you add expenses</p>
   );
 
   return (
     <>
-      <table className="table">
+      <table className="table" {...getTableProps()}>
         <thead className="table-headers">
-          <tr>
-            <th>Date</th>
-            <th>Amount</th>
-            <th>Category</th>
-            <th>Account</th>
-            <th>Acct Type</th>
-            <th>Actions</th>
-          </tr>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render('Header')}
+                </th>
+              ))}
+            </tr>
+          ))}
         </thead>
-        <tbody>
-          {
-            Object.values(expenses).map((expense) => (
-              <tr key={expense.id}>
-                <td>{expense.date}</td>
-                <td>${expense.amount}</td>
-                <td>{categories[expense.category].name}</td>
-                <td>{accounts[expense.account].title}</td>
-                <td>{accounts[expense.account].type}</td>
-                <td>
-                  <button onClick={() => handleDelete(expense.id)}>Delete</button>
-                </td>
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => {
+                  return (
+                    <td {...cell.getCellProps()}>
+                      {cell.render('Cell')}
+                    </td>
+                  )
+                })}
               </tr>
-            ))
-          }
+            )
+          })}
         </tbody>
       </table>
       {noTableContent}

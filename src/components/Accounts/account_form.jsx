@@ -19,19 +19,18 @@ const AccountForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="form">
-      <div className="form-labels">
+      <div className="form-input">
         <label htmlFor="account-title">Title</label>
-        <label htmlFor="account-type">Type</label>
-      </div>
-
-      <div className="form-inputs">
         <input
           type="text"
           id="account-title"
           required
           value={title}
           onChange={(event) => setTitle(event.target.value)} />
+      </div>
 
+      <div className="form-input">
+        <label htmlFor="account-type">Type</label>
         <select
           id="account-type"
           required
@@ -44,8 +43,9 @@ const AccountForm = () => {
           <option value="Credit">Credit</option>
           <option value="Bank Account">Bank Account</option>
         </select>
-        <button>Add</button>
       </div>
+
+      <button>Add</button>
     </form>
   );
 };
