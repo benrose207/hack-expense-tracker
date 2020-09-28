@@ -1,5 +1,4 @@
-import React, { useState, useContext } from 'react';
-import { AppContext } from '../../reducers/store';
+import React, { useState } from 'react';
 
 const AccountForm = ({ state, dispatch, id }) => {
   const currAcct = state.accounts[id];
