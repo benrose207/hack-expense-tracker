@@ -5,6 +5,7 @@ import { AppContext } from '../../reducers/store';
 import ExpenseForm from './expense_form.jsx';
 import ExpensesTable from './expenses_table.jsx';
 import { DeleteButton } from '../Util_Components/buttons.jsx';
+import ExpenseChart from './expense_chart.jsx';
 
 const Expenses = () => {
   const [state, dispatch] = useContext(AppContext);
@@ -101,6 +102,7 @@ const Expenses = () => {
   return (
     <>
       <h1>Expense Report</h1>
+      <ExpenseChart filteredData={filteredData}/>
       <h2>New Expense</h2>
       <ExpenseForm state={state} dispatch={dispatch} />
       <h2>All Expenses</h2>
