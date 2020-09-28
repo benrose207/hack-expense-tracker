@@ -86,7 +86,7 @@ const Expenses = () => {
   );
 
   const noTableContent = data.length ? null : (
-    <p>No expenses added yet! Make sure you've added an Account and Category before you add expenses</p>
+    <p className="alert">No expenses added yet! Make sure you've added an Account and Category before you add expenses</p>
   );
 
   const handleAcctFilter = (e) => {
@@ -99,19 +99,26 @@ const Expenses = () => {
     setCatFilterValue(e.target.value);
   };
 
+  const canCreateExp = Object.values(state.accounts).length && Object.values(state.categories).length
+
   return (
     <>
       <h1>Expense Report</h1>
-      <ExpenseChart filteredData={filteredData}/>
-      <h2>New Expense</h2>
-      <ExpenseForm state={state} dispatch={dispatch} />
+      <ExpenseChart filteredData={filteredData} />
+      {canCreateExp ? (
+        <>
+          <h2>New Expense</h2>
+          <ExpenseForm state={state} dispatch={dispatch} />
+        </>
+      ) : noTableContent}
       <h2>All Expenses</h2>
-      <div>
-        <h3>Filter Expenses</h3>
+      <div className="filter-bar">
+        <h3>Filter Expenses:</h3>
         <select
           id="account-select"
           data-type="account"
           onChange={handleAcctFilter}
+          className="expense-filter"
         >
           <option value="">- Accounts -</option>
           {Object.values(state.accounts).map((acct) => (
@@ -122,6 +129,7 @@ const Expenses = () => {
           id="category-select"
           data-type="category"
           onChange={handleCatFilter}
+          className="expense-filter"
         >
           <option value="">- Categories -</option>
           {Object.values(state.categories).map((category) => (
@@ -136,7 +144,6 @@ const Expenses = () => {
         dispatch={dispatch}
         parent="Exp"
       />
-      {noTableContent}
     </>
   );
 };

@@ -26,6 +26,11 @@ const CategoriesIndex = () => {
       {
         Header: 'Type',
         accessor: 'color',
+        Cell: ({ cell: { value } }) => (
+          <div
+            style={{ backgroundColor: value, height: '1.6rem', borderRadius: '6px' }}>
+            </div>
+        ),
       },
       {
         Header: 'Actions',
@@ -34,7 +39,7 @@ const CategoriesIndex = () => {
           <>
             <DeleteButton id={value} type='DELETE_CATEGORY' message={confirmDeleteMessage} />
             <span {...row.getToggleRowExpandedProps()}>
-              <FontAwesomeIcon icon={faEdit} />
+              <FontAwesomeIcon icon={faEdit} className="secondary-button"/>
             </span>
           </>
         ),

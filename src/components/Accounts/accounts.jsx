@@ -35,7 +35,7 @@ const AccountsIndex = () => {
           <>
             <DeleteButton id={value} type='DELETE_ACCOUNT' message={confirmDeleteMessage} />
             <span {...row.getToggleRowExpandedProps()}>
-              <FontAwesomeIcon icon={faEdit} />
+              <FontAwesomeIcon icon={faEdit} className="secondary-button"/>
             </span>
           </>
         ),

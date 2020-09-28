@@ -18,6 +18,6 @@ export const DeleteButton = ({ id, type, message }) => {
   };
 
   return (
-    <button onClick={handleDelete}><FontAwesomeIcon icon={faTrashAlt}/></button>
+    <button onClick={handleDelete}><FontAwesomeIcon icon={faTrashAlt} className="secondary-button"/></button>
   );
 };

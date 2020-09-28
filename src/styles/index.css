@@ -36,7 +36,7 @@ nav > a {
 
 /* Main */
 main {
-  width: 90%;
+  width: 80%;
   margin: 1.5rem auto;
 }
 
@@ -69,12 +69,16 @@ h2 {
   font-weight: 500;
 }
 
-.form-input > input, .form-input > select {
+.form-input > input, select {
   margin-top: 0.6rem;
   border: 1px solid #797979;
   padding: 0.5rem;
   border-radius: 6px;
   min-height: 2.6rem;
+}
+
+input:focus, select:focus {
+  border: 2px solid #6642f5;
 }
 
 /* Expense Table */
@@ -107,4 +111,36 @@ form button {
   font-weight: 500;
   margin-left: 1rem;
   margin-bottom: 0.3rem;
+}
+
+.filter-bar {
+  display: flex;
+  align-items: baseline;
+}
+
+.expense-filter {
+  margin-left: 1rem;
+}
+
+.secondary-button {
+  background-color: #dadada;
+  padding: 0.3rem;
+  border-radius: 3px;
+  margin-right: 0.6rem;
+}
+
+/* Chart */
+#chart-container {
+  border: 2px solid #797979;
+  border-radius: 6px;
+}
+
+
+#expense-chart {
+  max-height: 400px;
+  position: relative;
+}
+
+.alert {
+  margin: 2rem 0;
 }
